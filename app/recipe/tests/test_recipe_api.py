@@ -33,7 +33,7 @@ def image_upload_url(recipe_id):
     return reverse('recipe:recipe-upload-image', args=[recipe_id])
 
 
-def create_recipe (user, **params):
+def create_recipe(user, **params):
     """Create and return a sample recipe."""
     defaults = {
         'title': 'Sample recipe title',
@@ -124,7 +124,7 @@ class PrivateRecipeAPITests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         recipe = Recipe.objects.get(id=res.data['id'])
         for k, v in payload.items():
-            self.assertEqual(getattr(recipe,k), v)
+            self.assertEqual(getattr(recipe, k), v)
         self.assertEqual(recipe.user, self.user)
 
     def test_partial_update(self):
@@ -353,7 +353,7 @@ class PrivateRecipeAPITests(TestCase):
     def test_update_recipe_assign_ingredient(self):
         """Test assigning an existing ingredient when updating a recipe."""
         ingredient1 = Ingredient.objects.create(user=self.user,
-                                                  name='Pepper')
+                                                name='Pepper')
         recipe = create_recipe(user=self.user)
         recipe.ingredients.add(ingredient1)
 
